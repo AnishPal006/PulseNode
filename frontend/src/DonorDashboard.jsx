@@ -23,7 +23,10 @@ export default function DonorDashboard({ donorId, donorName, activeTab }) {
           (r) =>
             !declinedIds.current.has(r.requestId) &&
             (!donorDetailsRef.current ||
-              isCompatible(donorDetailsRef.current.bloodType, r.bloodTypeNeeded)),
+              isCompatible(
+                donorDetailsRef.current.bloodType,
+                r.bloodTypeNeeded,
+              )),
         );
         setAlerts(
           valid.map((r) => ({
@@ -400,13 +403,14 @@ export default function DonorDashboard({ donorId, donorName, activeTab }) {
                             I Can Donate
                           </button>
                           <button
-                            onClick={() =>
+                            onClick={() => {
+                              declinedIds.current.add(alert.requestId);
                               setAlerts(
                                 alerts.filter(
                                   (a) => a.requestId !== alert.requestId,
                                 ),
-                              )
-                            }
+                              );
+                            }}
                             className="flex-1 md:flex-none px-4 md:px-6 py-2 md:py-3 bg-white text-rose-500 rounded-xl md:rounded-2xl font-bold text-xs md:text-base hover:bg-rose-50 transition border border-rose-200"
                           >
                             Decline
