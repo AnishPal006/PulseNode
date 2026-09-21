@@ -8,6 +8,7 @@ import AdminDashboard from "./AdminDashboard";
 import CompleteProfile from "./CompleteProfile";
 import Sidebar from "./Sidebar";
 import { useGoogleLogin } from "@react-oauth/google";
+import { motion } from "framer-motion";
 
 export default function App() {
   const [currentView, setCurrentView] = useState(
@@ -126,26 +127,46 @@ export default function App() {
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-lime-400/10 rounded-full blur-[100px] -ml-40 -mb-40"></div>
 
           <div className="relative z-10 mt-10">
-            <div className="flex items-center space-x-4 mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center space-x-4 mb-20"
+            >
               <div className="w-12 h-12 bg-rose-500 rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg shadow-rose-500/30 text-white">
                 P
               </div>
               <span className="text-3xl font-extrabold tracking-tight">
                 PulseNode
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-6xl font-extrabold tracking-tighter leading-[1.1] mb-8">
+            <motion.h1
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-6xl font-extrabold tracking-tighter leading-[1.1] mb-8"
+            >
               The modern network for <br />
               <span className="text-rose-500">saving lives.</span>
-            </h1>
-            <p className="text-zinc-400 text-xl font-medium max-w-lg leading-relaxed">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="text-zinc-400 text-xl font-medium max-w-lg leading-relaxed"
+            >
               An algorithmic dispatch system connecting hospitals with eligible
               blood donors instantly.
-            </p>
+            </motion.p>
           </div>
 
-          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mb-10"
+          >
             <div className="bg-white/5 p-6 sm:p-8 rounded-[32px] backdrop-blur-sm border border-white/10 relative overflow-hidden group hover:bg-white/10 transition-colors">
               <div className="absolute top-0 right-0 w-32 h-32 bg-lime-400/20 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-lime-400/30 transition-all"></div>
               <h3 className="text-5xl font-extrabold text-white mb-2 tracking-tighter relative z-10">
@@ -164,12 +185,17 @@ export default function App() {
                 Verified hospitals and eligible donors.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right Side: Login Panel */}
         <div className="w-full lg:w-[45%] flex flex-col items-center justify-center p-4 md:p-8 bg-zinc-50 relative overflow-y-auto">
-          <div className="max-w-md w-full bg-white rounded-[40px] shadow-2xl p-6 md:p-12 border border-zinc-100 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="max-w-md w-full bg-white rounded-[40px] shadow-2xl p-6 md:p-12 border border-zinc-100 relative z-10"
+          >
             <div className="text-center mb-12">
               <div className="w-20 h-20 bg-zinc-900 text-white rounded-[28px] flex items-center justify-center mx-auto mb-8 text-3xl shadow-xl shadow-zinc-900/20">
                 <svg
@@ -304,7 +330,7 @@ export default function App() {
                 </div>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     );
