@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Home, Activity, FileText, Users, LogOut, X, Building } from "lucide-react";
+import {
+  Home,
+  Activity,
+  FileText,
+  Users,
+  LogOut,
+  X,
+  Building,
+} from "lucide-react";
 
 export default function Sidebar({ role, onLogout, activeTab, setActiveTab }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -98,16 +106,16 @@ export default function Sidebar({ role, onLogout, activeTab, setActiveTab }) {
                 </div>
               </div>
 
-              <div className="pt-6">
-                <a
-                  href="https://www.eraktkosh.in/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block w-full py-4 text-center bg-zinc-900 text-white font-bold rounded-2xl hover:bg-black transition shadow-lg shadow-zinc-900/20"
-                >
-                  Visit eRaktKosh (Govt. of India)
-                </a>
-              </div>
+                <div className="pt-6">
+                  <a
+                    href="https://www.friends2support.org/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block w-full py-4 text-center bg-zinc-900 text-white font-bold rounded-2xl hover:bg-black transition shadow-lg shadow-zinc-900/20"
+                  >
+                    Visit Friends2Support
+                  </a>
+                </div>
             </div>
           </div>
         </div>
@@ -117,11 +125,15 @@ export default function Sidebar({ role, onLogout, activeTab, setActiveTab }) {
       <div className="hidden md:flex w-64 bg-[#151515] text-white flex-col justify-between p-6 rounded-[32px] my-4 ml-4 h-[calc(100vh-2rem)] shadow-2xl relative z-50">
         <div>
           <div className="flex items-center space-x-3 mb-8 px-2">
-          <img src="/logo.png" alt="PulseNode" className="w-12 h-12 object-contain rounded-xl bg-white p-1 shadow-lg shadow-rose-500/30" />
-          <span className="text-2xl font-extrabold tracking-tight text-white">
-            PulseNode
-          </span>
-        </div>
+            <img
+              src="/logo.png"
+              alt="PulseNode"
+              className="w-12 h-12 object-contain rounded-xl bg-white p-1 shadow-lg shadow-rose-500/30"
+            />
+            <span className="text-2xl font-extrabold tracking-tight text-white">
+              PulseNode
+            </span>
+          </div>
           <nav className="space-y-2">
             {items.map((item) => {
               const isActive = activeTab === item.id;
