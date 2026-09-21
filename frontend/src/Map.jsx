@@ -1,4 +1,4 @@
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from "./config";
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -17,7 +17,7 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const MapView = ({ onAccept, onDecline, donorBloodType }) => {
+const MapView = ({ onAccept, onDecline, donorBloodType, ignoredIds = new Set() }) => {
   const [requests, setRequests] = useState([]);
   const [userPos, setUserPos] = useState(null);
 
@@ -41,7 +41,10 @@ const MapView = ({ onAccept, onDecline, donorBloodType }) => {
     const fetchRequests = () => {
       axios
         .get(`${API_BASE_URL}/api/requests/active`)
-        .then((res) => setRequests(res.data))
+        .then((res) => {
+          const valid = res.data.filter(r => !ignoredIds.has(r.requestId));
+          setRequests(valid);
+        })
         .catch((err) => console.error("Error fetching active requests", err));
     };
 
@@ -112,39 +115,40 @@ const MapView = ({ onAccept, onDecline, donorBloodType }) => {
                 position={[req.latitude, req.longitude]}
               >
                 <Popup>
-                                      <div className="text-center min-w-[150px]">
-                      <strong className="text-rose-600 block text-lg mb-1">
-                        {req.bloodTypeNeeded} needed!
-                      </strong>
-                      <span className="text-xs font-bold bg-rose-100 text-rose-700 px-2 py-1 rounded-full mb-2 inline-block uppercase">
-                        {req.urgencyLevel}
-                      </span>
-                      <p className="text-zinc-600 text-sm font-medium mt-1 mb-4">
-                        Units: {req.unitsNeeded}
-                      </p>
-                      
-                      {donorBloodType && !isCompatible(donorBloodType, req.bloodTypeNeeded) ? (
-                        <div className="w-full text-zinc-500 font-semibold text-xs py-2 px-2 bg-zinc-100 rounded-lg">
-                          Not a match for {donorBloodType}
-                        </div>
-                      ) : onAccept ? (
-                        <div className="flex justify-center space-x-2">
-                          <button
-                            onClick={() => handleAcceptLocal(req.requestId)}
-                            className="flex-1 bg-lime-400 hover:bg-lime-500 text-black font-bold text-xs py-2 px-2 rounded-lg transition shadow-sm"
-                          >
-                            Accept
-                          </button>
-                          <button
-                            onClick={() => handleDeclineLocal(req.requestId)}
-                            className="flex-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 font-bold text-xs py-2 px-2 rounded-lg transition"
-                          >
-                            Decline
-                          </button>
-                        </div>
-                      ) : null}
-                    </div>
-                  </Popup>
+                  <div className="text-center min-w-[150px]">
+                    <strong className="text-rose-600 block text-lg mb-1">
+                      {req.bloodTypeNeeded} needed!
+                    </strong>
+                    <span className="text-xs font-bold bg-rose-100 text-rose-700 px-2 py-1 rounded-full mb-2 inline-block uppercase">
+                      {req.urgencyLevel}
+                    </span>
+                    <p className="text-zinc-600 text-sm font-medium mt-1 mb-4">
+                      Units: {req.unitsNeeded}
+                    </p>
+
+                    {donorBloodType &&
+                    !isCompatible(donorBloodType, req.bloodTypeNeeded) ? (
+                      <div className="w-full text-zinc-500 font-semibold text-xs py-2 px-2 bg-zinc-100 rounded-lg">
+                        Not a match for {donorBloodType}
+                      </div>
+                    ) : onAccept ? (
+                      <div className="flex justify-center space-x-2">
+                        <button
+                          onClick={() => handleAcceptLocal(req.requestId)}
+                          className="flex-1 bg-lime-400 hover:bg-lime-500 text-black font-bold text-xs py-2 px-2 rounded-lg transition shadow-sm"
+                        >
+                          Accept
+                        </button>
+                        <button
+                          onClick={() => handleDeclineLocal(req.requestId)}
+                          className="flex-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 font-bold text-xs py-2 px-2 rounded-lg transition"
+                        >
+                          Decline
+                        </button>
+                      </div>
+                    ) : null}
+                  </div>
+                </Popup>
               </Marker>
             ) : null,
           )}

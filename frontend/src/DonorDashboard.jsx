@@ -14,7 +14,7 @@ export default function DonorDashboard({ donorId, donorName, activeTab }) {
   const [achievementData, setAchievementData] = useState(null);
   const [internalTab, setInternalTab] = useState("action");
   const [showHeroCard, setShowHeroCard] = useState(false);
-  const declinedIds = React.useRef(new Set());
+  const declinedIds = React.useRef(new Set(JSON.parse(localStorage.getItem(`declined_${donorId}`) || "[]")));
   const donorDetailsRef = React.useRef(null);
   useEffect(() => {
     const fetchActive = () => {
@@ -405,6 +405,7 @@ export default function DonorDashboard({ donorId, donorName, activeTab }) {
                           <button
                             onClick={() => {
                               declinedIds.current.add(alert.requestId);
+                              localStorage.setItem(`declined_${donorId}`, JSON.stringify(Array.from(declinedIds.current)));
                               setAlerts(
                                 alerts.filter(
                                   (a) => a.requestId !== alert.requestId,
@@ -427,9 +428,11 @@ export default function DonorDashboard({ donorId, donorName, activeTab }) {
                 <div className="overflow-hidden rounded-[32px] shadow-sm border border-zinc-100">
                   <MapView
                     donorBloodType={donorDetails?.bloodType}
+                    ignoredIds={declinedIds.current}
                     onAccept={handleAccept}
                     onDecline={(requestId) => {
                       declinedIds.current.add(requestId);
+                      localStorage.setItem(`declined_${donorId}`, JSON.stringify(Array.from(declinedIds.current)));
                       setAlerts(
                         alerts.filter((a) => a.requestId !== requestId),
                       );
