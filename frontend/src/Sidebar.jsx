@@ -116,14 +116,12 @@ export default function Sidebar({ role, onLogout, activeTab, setActiveTab }) {
       {/* Desktop Sidebar */}
       <div className="hidden md:flex w-64 bg-[#151515] text-white flex-col justify-between p-6 rounded-[32px] my-4 ml-4 h-[calc(100vh-2rem)] shadow-2xl relative z-50">
         <div>
-          <div className="flex items-center space-x-3 mb-12 pl-2 mt-2">
-            <div className="w-10 h-10 bg-rose-500 rounded-2xl flex items-center justify-center font-bold text-xl shadow-lg shadow-rose-500/30">
-              P
-            </div>
-            <span className="text-2xl font-extrabold tracking-tight">
-              PulseNode
-            </span>
-          </div>
+          <div className="flex items-center space-x-3 mb-8 px-2">
+          <img src="/logo.png" alt="PulseNode" className="w-12 h-12 object-contain rounded-xl bg-white p-1 shadow-lg shadow-rose-500/30" />
+          <span className="text-2xl font-extrabold tracking-tight text-white">
+            PulseNode
+          </span>
+        </div>
           <nav className="space-y-2">
             {items.map((item) => {
               const isActive = activeTab === item.id;

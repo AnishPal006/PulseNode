@@ -133,9 +133,7 @@ export default function App() {
               transition={{ duration: 0.5 }}
               className="flex items-center space-x-4 mb-20"
             >
-              <div className="w-12 h-12 bg-rose-500 rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg shadow-rose-500/30 text-white">
-                P
-              </div>
+              <img src="/logo.png" alt="PulseNode Logo" className="w-14 h-14 object-contain rounded-2xl bg-white p-1 shadow-lg shadow-rose-500/30" />
               <span className="text-3xl font-extrabold tracking-tight">
                 PulseNode
               </span>
