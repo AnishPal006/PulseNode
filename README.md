@@ -1,5 +1,5 @@
 <div align="center">
-  <div style="background-color: #f43f5e; color: white; width: 64px; height: 64px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; margin-bottom: 20px;">P</div>
+  <div style="background-color: #f43f5e; color: white; width: 64px; height: 64px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; margin-bottom: 20px;"></div>
   <h1>PulseNode</h1>
   <p><strong>An Algorithmic Emergency Blood Dispatch System</strong></p>
   <p>🔴 <strong><a href="https://pulse-node-frontend.vercel.app/">Live Demo</a></strong></p>
