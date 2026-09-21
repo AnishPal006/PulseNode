@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Service
 public class MatchingService {
@@ -29,11 +32,31 @@ public class MatchingService {
     @Autowired
     private SOSNotificationRepository notificationRepository;
 
+    public boolean isCompatible(String donorType, String receiverType) {
+        if (donorType == null || receiverType == null) return false;
+        Map<String, List<String>> rules = Map.of(
+            "O-", Arrays.asList("O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"),
+            "O+", Arrays.asList("O+", "A+", "B+", "AB+"),
+            "A-", Arrays.asList("A-", "A+", "AB-", "AB+"),
+            "A+", Arrays.asList("A+", "AB+"),
+            "B-", Arrays.asList("B-", "B+", "AB-", "AB+"),
+            "B+", Arrays.asList("B+", "AB+"),
+            "AB-", Arrays.asList("AB-", "AB+"),
+            "AB+", Arrays.asList("AB+")
+        );
+        List<String> validReceivers = rules.get(donorType);
+        return validReceivers != null && validReceivers.contains(receiverType);
+    }
+
     @Transactional
     public void processNewRequest(BloodRequest request) {
-        List<Donor> matchedDonors = donorRepository.findEligibleDonorsNearby(
+        List<Donor> allDonors = donorRepository.findEligibleDonorsNearby(
                 request.getBloodTypeNeeded(), request.getLatitude(), request.getLongitude(), 50000.0
         );
+
+        List<Donor> matchedDonors = allDonors.stream()
+                .filter(donor -> isCompatible(donor.getBloodType(), request.getBloodTypeNeeded()))
+                .collect(Collectors.toList());
 
         for (Donor donor : matchedDonors) {
             // Step 3 Trace: Write Match row[cite: 3]
@@ -64,6 +87,4 @@ public class MatchingService {
                 request.getRequestId(), request.getBloodTypeNeeded(), request.getUrgencyLevel()
         );
     }
-
-
 }

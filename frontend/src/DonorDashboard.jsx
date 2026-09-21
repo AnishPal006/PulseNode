@@ -7,6 +7,7 @@ import MapView from "./Map";
 import confetti from "canvas-confetti";
 import HeroCardModal from "./components/HeroCardModal";
 import DonorCharts from "./components/DonorCharts";
+import { isCompatible } from "./utils/bloodLogic";
 
 export default function DonorDashboard({ donorId, donorName, activeTab }) {
   const [alerts, setAlerts] = useState([]);
@@ -22,7 +23,7 @@ export default function DonorDashboard({ donorId, donorName, activeTab }) {
           (r) =>
             !declinedIds.current.has(r.requestId) &&
             (!donorDetailsRef.current ||
-              r.bloodTypeNeeded === donorDetailsRef.current.bloodType),
+              isCompatible(donorDetailsRef.current.bloodType, r.bloodTypeNeeded)),
         );
         setAlerts(
           valid.map((r) => ({
@@ -421,6 +422,7 @@ export default function DonorDashboard({ donorId, donorName, activeTab }) {
               <div className="col-span-12">
                 <div className="overflow-hidden rounded-[32px] shadow-sm border border-zinc-100">
                   <MapView
+                    donorBloodType={donorDetails?.bloodType}
                     onAccept={handleAccept}
                     onDecline={(requestId) => {
                       declinedIds.current.add(requestId);
