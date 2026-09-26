@@ -1,0 +1,11 @@
+name: Keep Render Backend Alive
+on:
+  schedule:
+    - cron: "*/14 * * * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Backend Health Endpoint
+        run: curl -f -s https://pulsenode-backend.onrender.com/actuator/health || echo "Ping failed, but workflow continues"
