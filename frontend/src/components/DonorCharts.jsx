@@ -2,16 +2,16 @@ import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 const impactData = [
-  { name: "Trauma & ER", value: 45, color: "#ef4444" },
-  { name: "Surgeries", value: 30, color: "#3b82f6" },
-  { name: "Cancer Treatment", value: 15, color: "#8b5cf6" },
-  { name: "Chronic Illness", value: 10, color: "#10b981" },
+  { name: "Trauma & ER", value: 45, color: "#00b1ff" },
+  { name: "Surgeries", value: 30, color: "#59b4ff" },
+  { name: "Cancer Treatment", value: 15, color: "#4846c6" },
+  { name: "Chronic Illness", value: 10, color: "#d8d8e3" },
 ];
 
 const leaderboard = [
   { rank: 1, name: "Sarah J.", donations: 24, tier: "Gold" },
   { rank: 2, name: "Mike T.", donations: 21, tier: "Gold" },
-  { rank: 3, name: "You", donations: 19, tier: "Gold", isUser: true },
+  { rank: 3, name: "Alex R.", donations: 19, tier: "Gold", isUser: true },
   { rank: 4, name: "Emma W.", donations: 15, tier: "Silver" },
   { rank: 5, name: "James L.", donations: 12, tier: "Silver" },
 ];
@@ -20,12 +20,12 @@ export default function DonorCharts() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
       {/* Impact Distribution Pie Chart */}
-      <div className="bg-white rounded-[32px] p-6 shadow-sm border border-zinc-100">
-        <h3 className="text-zinc-900 font-extrabold text-xl tracking-tight mb-2">
-          Your Blood, Verified
+      <div className="bg-iris-shadow rounded-3xl p-6 shadow-none border border-iris-border">
+        <h3 className="text-white font-semibold text-xl tracking-tight mb-2">
+          The bigger picture
         </h3>
-        <p className="text-zinc-500 text-sm font-medium mb-6">
-          See exactly where your donations went.
+        <p className="text-ash text-sm font-medium mb-6">
+          Illustrative impact categories · sample data
         </p>
 
         <div className="h-48 relative">
@@ -47,18 +47,20 @@ export default function DonorCharts() {
               </Pie>
               <Tooltip
                 contentStyle={{
-                  borderRadius: "12px",
-                  border: "none",
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "24px",
+                  background: "#232269",
+                  border: "1px solid #4846c6",
+                  boxShadow: "none",
+                  color: "#ffffff",
                 }}
-                itemStyle={{ fontWeight: "bold" }}
+                itemStyle={{ fontWeight: 500 }}
               />
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-3xl font-black text-zinc-900">100%</span>
-            <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">
-              Tracked
+            <span className="text-3xl font-semibold text-white">100%</span>
+            <span className="text-xs font-semibold text-ash uppercase tracking-wider">
+              Example
             </span>
           </div>
         </div>
@@ -70,7 +72,7 @@ export default function DonorCharts() {
                 className="w-3 h-3 rounded-full"
                 style={{ backgroundColor: item.color }}
               ></div>
-              <span className="text-xs font-bold text-zinc-600">
+              <span className="text-xs font-semibold text-ash">
                 {item.name}
               </span>
             </div>
@@ -79,13 +81,13 @@ export default function DonorCharts() {
       </div>
 
       {/* Regional Leaderboard */}
-      <div className="bg-white rounded-[32px] p-6 shadow-sm border border-zinc-100">
+      <div className="bg-iris-shadow rounded-3xl p-6 shadow-none border border-iris-border">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-zinc-900 font-extrabold text-xl tracking-tight">
-            Local Heroes
+          <h3 className="text-white font-semibold text-xl tracking-tight">
+            Community giving
           </h3>
-          <span className="bg-amber-100 text-amber-600 text-xs font-bold px-3 py-1 rounded-full uppercase">
-            Top 5
+          <span className="bg-deep-iris text-clinical-cyan text-xs font-semibold px-3 py-1 rounded-full uppercase">
+            Sample
           </span>
         </div>
 
@@ -93,22 +95,22 @@ export default function DonorCharts() {
           {leaderboard.map((user) => (
             <div
               key={user.rank}
-              className={`flex items-center justify-between p-3 rounded-2xl ${user.isUser ? "bg-zinc-900 text-white shadow-lg" : "bg-zinc-50 hover:bg-zinc-100 transition"} `}
+              className={`flex items-center justify-between p-3 rounded-2xl ${user.isUser ? "bg-deep-iris text-white shadow-none" : "bg-deep-iris hover:bg-deep-iris transition"} `}
             >
               <div className="flex items-center space-x-4">
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center font-black text-sm ${user.rank === 1 ? "bg-amber-400 text-amber-900" : user.rank === 2 ? "bg-slate-300 text-slate-700" : user.rank === 3 ? "bg-amber-700 text-amber-100" : "bg-zinc-200 text-zinc-500"}`}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm ${user.rank === 1 ? "bg-iris-pulse text-white" : user.rank === 2 ? "bg-deep-iris text-white" : user.rank === 3 ? "bg-iris-pulse text-white" : "bg-deep-iris text-ash"}`}
                 >
                   #{user.rank}
                 </div>
                 <div>
                   <p
-                    className={`font-bold ${user.isUser ? "text-white" : "text-zinc-900"}`}
+                    className={`font-semibold ${user.isUser ? "text-white" : "text-white"}`}
                   >
                     {user.name}
                   </p>
                   <p
-                    className={`text-xs font-medium ${user.isUser ? "text-zinc-400" : "text-zinc-500"}`}
+                    className={`text-xs font-medium ${user.isUser ? "text-ash" : "text-ash"}`}
                   >
                     {user.tier} Tier
                   </p>
@@ -116,12 +118,12 @@ export default function DonorCharts() {
               </div>
               <div className="text-right">
                 <span
-                  className={`font-black ${user.isUser ? "text-lime-400" : "text-zinc-900"}`}
+                  className={`font-semibold ${user.isUser ? "text-clinical-cyan" : "text-white"}`}
                 >
                   {user.donations}
                 </span>
                 <span
-                  className={`text-xs ml-1 ${user.isUser ? "text-zinc-400" : "text-zinc-400"}`}
+                  className={`text-xs ml-1 ${user.isUser ? "text-ash" : "text-ash"}`}
                 >
                   donations
                 </span>

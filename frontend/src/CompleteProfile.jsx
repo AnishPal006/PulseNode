@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "./config";
 import React, { useState } from "react";
 import axios from "axios";
+import Brand from "./components/Brand";
 
 export default function CompleteProfile({ tempUser, onComplete }) {
   const [phone, setPhone] = useState("");
@@ -73,40 +74,52 @@ export default function CompleteProfile({ tempUser, onComplete }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F5F7] font-sans flex flex-col items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-10 border border-zinc-100">
-        <h2 className="text-3xl font-extrabold text-zinc-900 text-center mb-2 tracking-tight">
-          Almost there
+    <div className="profile-page">
+      <Brand />
+      <div className="profile-card">
+        <p className="eyebrow">YOUR FIRST CONNECTION</p>
+        <h2 className="text-3xl font-semibold text-white text-center mb-2 tracking-tight">
+          Almost <span>there.</span>
         </h2>
-        <p className="text-zinc-500 text-center mb-8 font-medium">
+        <p className="text-ash text-center mb-8 font-medium">
           Welcome, {tempUser.name}! Just a few more details to set up your{" "}
-          <span className="font-bold text-zinc-800">{tempUser.role}</span>{" "}
+          <span className="font-semibold text-white">{tempUser.role}</span>{" "}
           account.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-bold text-zinc-700 mb-2 pl-1">
-              Contact Phone
+            <label
+              htmlFor="contact-phone"
+              className="block text-sm font-semibold text-white mb-2 pl-1"
+            >
+              Contact phone
             </label>
             <input
+              id="contact-phone"
               type="tel"
+              autoComplete="tel"
+              placeholder="Your phone number"
               required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full rounded-2xl bg-zinc-50 border-transparent shadow-sm p-4 text-zinc-900 font-bold focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white outline-none transition-all"
+              className="w-full rounded-2xl bg-deep-iris border-transparent shadow-none p-4 text-white font-semibold focus:ring-4 focus:ring-iris-pulse/20 focus:border-iris-veil focus:bg-iris-shadow outline-none transition-all"
             />
           </div>
 
           {tempUser.role === "donor" && (
             <div>
-              <label className="block text-sm font-bold text-zinc-700 mb-2 pl-1">
-                Blood Type
+              <label
+                htmlFor="profile-blood-type"
+                className="block text-sm font-semibold text-white mb-2 pl-1"
+              >
+                Blood group
               </label>
               <select
+                id="profile-blood-type"
                 value={bloodType}
                 onChange={(e) => setBloodType(e.target.value)}
-                className="w-full rounded-2xl bg-zinc-50 border-transparent shadow-sm p-4 text-zinc-900 font-bold focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 focus:bg-white outline-none transition-all cursor-pointer"
+                className="w-full rounded-2xl bg-deep-iris border-transparent shadow-none p-4 text-white font-semibold focus:ring-4 focus:ring-iris-pulse/20 focus:border-iris-veil focus:bg-iris-shadow outline-none transition-all cursor-pointer"
               >
                 <option>O-</option>
                 <option>O+</option>
@@ -123,11 +136,7 @@ export default function CompleteProfile({ tempUser, onComplete }) {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-4 rounded-2xl font-extrabold text-white text-lg transition-all shadow-xl mt-4 ${
-              loading
-                ? "bg-zinc-400 cursor-not-allowed"
-                : "bg-rose-500 hover:bg-rose-600 shadow-rose-500/30 hover:shadow-rose-500/50 transform hover:-translate-y-1"
-            }`}
+            className="button button-primary w-full mt-4"
           >
             {loading ? "Saving..." : "Finish Registration"}
           </button>
