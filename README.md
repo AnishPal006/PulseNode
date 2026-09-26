@@ -102,9 +102,22 @@ _The App will start on `http://localhost:5173`_
 
 ---
 
-## 📸 Screenshots
 
-### 🚑 Hospital Command Center
+## 📸 Platform Interface
+
+| Landing Page | Network Overview |
+| :---: | :---: |
+| ![Landing Page](assets/landing.png) | ![Network Overview](assets/network_overview.png) |
+
+| Donor Dashboard | Hospital Dashboard |
+| :---: | :---: |
+| ![Donor Dashboard](assets/donor_dashboard.png) | ![Hospital Dashboard](assets/hospital_dashboard.png) |
+
+| Live SOS Tracking Map |
+| :---: |
+| ![Live Dispatch Map](assets/match_map.png) |
+
+## 🚑 Hospital Command Center
 *Real-time map monitoring dispatch status and donor ETA.*
 ![Hospital Dispatch Radar](docs/images/hospital_dispatch.png)
 
