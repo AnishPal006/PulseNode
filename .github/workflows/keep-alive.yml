@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Backend Health Endpoint
-        run: curl -f -s https://pulsenode-backend.onrender.com/actuator/health || echo "Ping failed, but workflow continues"
+        run: curl -s https://pulsenode-backend.onrender.com/actuator/health

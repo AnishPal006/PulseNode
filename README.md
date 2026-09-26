@@ -117,29 +117,6 @@ _The App will start on `http://localhost:5173`_
 | :---: |
 | ![Live Dispatch Map](assets/match_map.png) |
 
-## 🚑 Hospital Command Center
-*Real-time map monitoring dispatch status and donor ETA.*
-![Hospital Dispatch Radar](docs/images/hospital_dispatch.png)
-
-### ❤️ Donor Radar & Action
-*Pulsing interface alerting donors of nearby emergencies.*
-![Donor Action Dashboard](docs/images/donor_dashboard_action.png)
-
-### 🏆 Donor Impact & Heroes
-*Gamified statistics tracking lifelong impact and local leaderboards.*
-![Donor Impact Dashboard](docs/images/donor_dashboard_impact.png)
-
-### 🎁 Donor Rewards
-*Tiered reward system for continuous verified donations.*
-![Donor Rewards](docs/images/donor_rewards.png)
-
-### 📊 Admin Console
-*Data-rich dashboard analyzing platform volume and fulfillment rates.*
-![Admin Console](docs/images/admin_console.png)
-
----
----
-
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
